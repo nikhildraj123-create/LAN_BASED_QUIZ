@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <title>Quiz</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h2>Question {{ question_number }} / {{ total_questions }}</h2>
+
+    <div class="timer">
+
+        Time Left:
+        <span id="timer">10</span>
+
+        seconds
+
+    </div>
+
+
+    <h3>
+        {{ question.question }}
+    </h3>
+
+
+    <form id="answerForm"
+          method="POST"
+          action="/answer">
+
+        {% for option in question.options %}
+
+        <label class="option">
+
+            <input
+                type="radio"
+                name="answer"
+                value="{{ loop.index }}"
+            >
+
+            {{ loop.index }}.
+            {{ option }}
+
+        </label>
+
+        {% endfor %}
+
+
+        <button type="submit">
+            SUBMIT ANSWER
+        </button>
+
+    </form>
+
+</div>
+
+
+<script>
+
+let timeLeft = 10;
+
+let timer = setInterval(function() {
+
+    timeLeft--;
+
+    document.getElementById("timer").innerText = timeLeft;
+
+
+    if (timeLeft <= 0) {
+
+
+        document.getElementById("answerForm").submit();
+
+    }
+
+}, 1000);
+
+</script>
+
+</body>
+
+</html>
