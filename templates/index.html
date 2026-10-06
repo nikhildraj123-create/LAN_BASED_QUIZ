@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <title>LAN Quiz</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>LAN QUIZ</h1>
+
+    <p>Computer Networks Quiz</p>
+
+    <form id="quizForm" method="POST">
+
+        <label>Server IP Address</label>
+
+        <input
+            type="text"
+            id="server_ip"
+            placeholder="Example: 192.168.1.10"
+            required
+        >
+
+        <label>Your Name</label>
+
+        <input
+            type="text"
+            name="name"
+            placeholder="Enter your name"
+            required
+        >
+
+        <button type="submit">
+            JOIN QUIZ
+        </button>
+
+    </form>
+
+</div>
+
+
+<script>
+
+document.getElementById("quizForm").addEventListener("submit", function(event) {
+
+    event.preventDefault();
+
+    let ip = document.getElementById("server_ip").value.trim();
+
+    if (ip === "") {
+        alert("Please enter server IP");
+        return;
+    }
+
+
+    this.action = "http://" + ip + ":5000/start";
+
+    this.submit();
+
+});
+
+</script>
+
+</body>
+
+</html>
